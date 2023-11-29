@@ -1,0 +1,79 @@
+---
+title: "IT Schools in Berlin"
+author: "W.J.Miakhel"
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+knit: (function(inputFile, encoding) {
+      out_dir <- "./output";
+      rmarkdown::render(inputFile,
+                        encoding=encoding,
+                        output_dir=file.path(dirname(inputFile), out_dir))})
+                        
+
+---
+
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,cache = FALSE,warning = FALSE, message = FALSE,comment = FALSE)
+```
+
+```{r}
+source('schools.R')
+library(knitr)
+library(kableExtra)
+library(DT)
+opts_chunk$set(echo = FALSE,warning = FALSE, message = FALSE)
+
+map
+```
+
+<br><br><br>
+```{r eval=TRUE, echo = FALSE, results='asis'}
+data <- data %>% select(-c("lat","long","main_syllabus")) 
+datatable(    
+              data,
+              escape=FALSE,
+              
+              class = "hover cell-border stripe",
+              extensions = c('Buttons'),
+              
+              colnames=c(
+                             "Name",
+                             "Course offer",
+                             "Course Type",
+                             "Ratings(5)",
+                             "Duration Months",
+                             "Start Time",
+                             "Job Assistance",
+                             "Address",
+                             "Telephone",
+                             "Email"
+                        ),
+            options = list(
+                              pageLength = 400,
+                              dom = 'Bfrtip',
+                              buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                              columnDefs = list(
+                                                 list(className = 'dt-center',targets= 2:10)
+                                                )
+                          ),
+                      
+            caption = htmltools::tags$caption(
+                                              style = 'caption-side: top;
+                                                       text-align: center;',
+                                      'Table 1: ', htmltools::em('List of IT Institutes in Berlin.')
+                                              )
+  
+                
+              
+)
+ 
+```
+Note: Today is 18.April.2023 and above school Ratings may differ according to the time
+        

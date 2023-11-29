@@ -1,0 +1,10 @@
+Name,Course Offer,Ratings out 5,Main Syllabus,Duration_in_Months,Start Time,Job Assistance,Address,email_address,long_lat
+Code Academy Berlin,"Data Analytics and Web development, online",4.9 (35),Data Analytics Syllabus,5,"Monday, May 22nd 2023",To be asked,"Erich-Weinert-Straße 145, 10409 Berlin,  015128791278 ",jost@codeacademyberlin.com,"52,543858, 13,440491"
+Data Science Retreat,"Data Science, online",3.9 (8),Syllabus,2,to be asked,To be asked,"Eislebener Str. 4, 10789 Berlin,  03023633473 ",admissions@datascienceretreat.com,"52,500671, 13,334899"
+Stackfuel,"Data Analytics and Science Python, online",4.9 (31),Syllabus Data Analytics ,4,Every 1 and 2 Month,To be asked,"Nostitzstraße 20, 10961 Berlin,  030544533499",info@stackfuel.com,"52,490818, 13,390216"
+Lewagon,"Data Science, online /Campus",4.6 (65),Data Science,2,to be asked,To be asked,"Rudi-Dutschke-Straße 26, 10969 Berlin,  03091733731",NA,"52,506889, 13,391413"
+WBS Coding school Berlin,"Data Science, online ",4.9 (34),Data Science,4,April 19 2023,Ja,"Weiskopffstr. 16 · 12459 Berlin,  030 555789760",info@wbscodingschool.com,"52,457195, 13,540125"
+WBS Training,"Data Science, online",4.6 (37),Data Science,4,23-Jun,To be asked,"Friedrichstraße 150-152, 10117 Berlin,  030 585815400",NA,"52,518555, 13,388312"
+Spiced Academy,"Data science, online/Campus",3.6 (35),Data Science,3,April 24 and May 22 2023,To be asked,"Ritterstraße 12-14, 10969 Berlin,  03098562427",info@spiced-academy.com,"52,501656, 13,411284"
+Ironhack,"Data Analytics, online/Campus",4.1 (39),Data Analytics Syllabus,2,May 8 2023,To be asked,"Storkower Str. 132, 10407 Berlin,  030 403682421",NA,"52,503662, 13,407639"
+career foundary,"Data Analyst, online",4.3 (203),Data Analytics Syllabus,3.5,to be asked,Granteed,"CareerFoundry GmbH, c/o Factory Görlitzer Park, Lohmühlenstraße 65, 12435 Berlin,  03048492016",NA,"52,493958, 13,446101"

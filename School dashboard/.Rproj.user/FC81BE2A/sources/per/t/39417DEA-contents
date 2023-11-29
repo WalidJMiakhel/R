@@ -1,0 +1,260 @@
+---
+title: "<center> PARR -  Feb 2021 </center>"
+
+output: html_document
+   
+---
+
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE,comment = NA, message = FALSE, warning=FALSE, fig.align = 'center' )
+```
+
+<center> HH Data Collection Monitoring Report
+
+<center> Date :`r Sys.Date()`
+
+<!-- *** -->
+
+```{r, include=FALSE}
+source("./PARR_HH_feb_2021_Cleaning - Copy.R")
+library(DT)
+```
+
+# {.tabset}
+
+<!-- Tracking - start -->
+## Tracking
+<center> **Tracking by Province** </center> </br>
+
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(progress_province_merged, extensions = c('Buttons'),
+              colnames=c("province", "Sample","IDP", "Returnee", "Host", "Total_interviews", "Progress", "Validated", "Invalidated", "Remaining"),
+              options = list(
+                  pageLength = 400,
+                  dom = 'Bfrtip',
+                  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                  columnDefs = list(list(className = 'dt-center', targets = 2:7))
+                )
+              
+              )  %>% 
+  formatStyle('Invalidated',  color = 'red', fontWeight = 'bold') %>%
+  formatStyle('Validated',  color = 'green', fontWeight = 'bold') %>%
+  formatStyle('Progress',  color = 'green', fontWeight = 'bold') %>%
+  formatStyle('Remaining', fontWeight = 'bold')
+```
+
+***
+
+<center> **Tracking by District** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(progress_district_merged, extensions = c('Buttons'),
+              colnames=c("province","district", "Sample","IDP", "Returnee", "Host", "Total_interviews", "Progress", "Validated", "Invalidated", "Remaining"),
+              options = list(
+                  pageLength = 400,
+                  dom = 'Bfrtip',
+                  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                  columnDefs = list(list(className = 'dt-center', targets = 2:7))
+                )
+              
+              )  %>% 
+  formatStyle('Invalidated',  color = 'red', fontWeight = 'bold') %>%
+  formatStyle('Validated',  color = 'green', fontWeight = 'bold') %>%
+  formatStyle('Progress',  color = 'green', fontWeight = 'bold') %>%
+  formatStyle('Remaining', fontWeight = 'bold')
+```
+
+***
+
+<!-- Tracking - end -->
+
+## General Checks  
+
+<center>**Interviews with Duplicate uuid** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(duplicate_surveys,
+              options = list(
+                  pageLength = 2000,
+                  dom = 'ft',
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+  )
+```
+***
+
+<center>**Enumerators who made a survey below `r time_min` minutes** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(survey_under_time_min,
+              options = list(
+                  pageLength = 2000,
+                  dom = 'ft',
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+  )
+```
+
+***
+
+<center>**Surveys ending before they start** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(ending_before_start,
+              options = list(
+                  pageLength = 2000,
+                  dom = 'ft',
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+  )
+```
+
+***
+
+<center>**Surveys made before first day fo data collection(**`r assessment_start_date`**)** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(started_before,
+              options = list(
+                  pageLength = 2000,
+                  dom = 'ft',
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+  )
+```
+
+***
+
+<center>**Surveys made in the future** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(future_survey,
+              options = list(
+                  pageLength = 2000,
+                  dom = 'ft',
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+  )
+```
+
+***
+
+<center>**Surveys that don't end on same day started** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(survey_not_end_today,
+              options = list(
+                  pageLength = 2000,
+                  dom = 'ft',
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+  )
+```
+
+***
+
+<center>**Number of surveys submitted per day** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+kable(survey_status_per_day)%>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),fixed_thead = T, full_width = F)
+```
+
+***
+
+
+<center>**Average interview duration by enumerator** </center> </br>
+```{r eval=TRUE, echo=FALSE, results='asis'}
+kable(avg_survey_length)%>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),fixed_thead = T, full_width = F)
+```
+
+***
+
+## Enumerator Progress
+
+<center>**Number of surveys submitted per day by enumerator** </center> </br>
+
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(survey_per_day_enumerator, extensions = c('Buttons'),
+              colnames=c("Date", "Enumerator", "Accepted", "Deleted", "Total_submissions", "Avergage_survey", "worked_days"),
+              options = list(
+                  pageLength = 500,
+                  dom = 'Bfrtip',
+                  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                  columnDefs = list(list(className = 'dt-center', targets = 1:6))
+                )
+              )%>% 
+  formatStyle('Deleted',  color = 'red', fontWeight = "bold") %>% 
+  formatStyle('Accepted',  color = 'green', fontWeight = "bold")
+```
+
+***
+
+## Likert Responses Progress
+
+<center>**Likert scale same responses in a section** </center> </br>
+
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(likert.morethan50per, extensions = c('Buttons'),
+              colnames=c("Enumerator", "Date", "Number_of_times"),
+              options = list(
+                  pageLength = 500,
+                  dom = 'Bfrtip',
+                  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+              )
+```
+
+***
+
+## Multiple Select Responses Progress
+
+<center>**Multiple select questions - if only 1 option is select for more than 50%** </center> </br>
+
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(multi1.morethan50per, extensions = c('Buttons'),
+              colnames=c("Enumerator", "Date", "Number_of_times"),
+              options = list(
+                  pageLength = 500,
+                  dom = 'Bfrtip',
+                  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+              )
+```
+
+***
+
+<center>**Multiple select questions - if more than 3 options are select for more than 50%** </center> </br>
+
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(multi3.morethan50per, extensions = c('Buttons'),
+              colnames=c("Enumerator", "Date", "Number_of_times"),
+              options = list(
+                  pageLength = 500,
+                  dom = 'Bfrtip',
+                  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+              )
+```
+
+***
+## Deleted Interviews
+
+<center>**Deleted Interviews and Reason for deletion** </center> </br>
+
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(deleted_interviews, extensions = c('Buttons'),
+              colnames=c("Enumerator", "UUID", "Reason","Feedback"),
+              options = list(
+                  pageLength = 500,
+                  dom = 'Bfrtip',
+                  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                  columnDefs = list(list(className = 'dt-center'))
+                )
+              )
+```
+***

@@ -1,0 +1,70 @@
+---
+title: "sauberkeit"
+author: "Walid"
+date: "2023-05-03"
+output: html_document
+---
+
+```{r setup, include=FALSE,echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE,comment = NA, message = FALSE, warning=FALSE)
+```
+
+```{r include=FALSE}
+source("Sauberkeit.R")
+
+library(DT)
+
+```
+# {.tabset}
+
+## Handwritten Data
+<center> **Handwritten data by our own** </center><br>
+```{r}
+knitr::include_graphics("image1.jpg")
+
+knitr::include_graphics("image2.jpg")
+knitr::include_graphics("image3.jpg")
+```
+
+## Excel Format
+```{r eval=TRUE, echo=FALSE, results='asis'}
+DT::datatable(raw_df, extensions = c('Buttons'),
+              colnames=c("Name","Kuche","Flure","Badezimmer","Datum"),
+              options = list(
+                  pageLength = 400,
+                  dom = 'Bfrtip',
+                  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                  columnDefs = list(list(className = 'dt-center', targets =1:5 ))
+                ))
+```
+
+## Visualization of data
+```{r eval=TRUE, echo=FALSE}
+count_cleaning <- raw_df %>% 
+                  group_by(Name) %>% 
+                  summarize(count=n()) %>% 
+                  arrange(desc(count)) %>% 
+  
+                  ggplot(aes(reorder(Name,desc(count)),count))+
+  
+                  geom_col(
+                            fill="steelblue",
+                            width = 0.5,
+                            position = position_dodge(width = 0.8)
+                          )+
+  
+                  geom_text(
+                              aes(label = count),
+                              position = position_dodge(width = 0.8),vjust= -0.5
+                            )+
+                  labs(x="",y="Number of times cleaned")
+count_cleaning
+
+```
+
+## My Effort
+```{r}
+knitr::include_graphics("image1.jpg")
+paste0("To be added tomo")
+```
+
